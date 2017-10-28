@@ -3,10 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Based on https://github.com/buildit/jenkins-pipeline-libraries -->
-
     <groupId>io.nextlayer.ci</groupId>
-    <artifactId>jenkins-pipeline-shared-library-example</artifactId>
+    <artifactId>jenkins-pipeline-shared-library-example-maven</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -25,27 +23,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jenkins.version>2.85</jenkins.version>
         <groovy.version>2.4.12</groovy.version>
-        <workflow-job.version>2.10</workflow-job.version>
+        <junit.version>4.12</junit.version>
+        <jenkins-pipeline-unit.version>1.1</jenkins-pipeline-unit.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
-        </repository>
-    </repositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jenkins-ci.plugins.workflow</groupId>
-                <artifactId>workflow-job</artifactId>
-                <version>${workflow-job.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -53,72 +34,22 @@
             <artifactId>groovy-all</artifactId>
             <version>${groovy.version}</version>
         </dependency>
-
-      <!--  <dependency>
-            <groupId>com.cloudbees</groupId>
-            <artifactId>groovy-cps</artifactId>
-            <version>1.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.main</groupId>
-            <artifactId>jenkins-core</artifactId>
-            <version>${jenkins.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>pipeline-input-step</artifactId>
-            <version>2.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins.workflow</groupId>
-            <artifactId>workflow-job</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins.workflow</groupId>
-            <artifactId>workflow-cps</artifactId>
-            <version>2.41</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins.workflow</groupId>
-            <artifactId>workflow-api</artifactId>
-            <version>2.23.1</version>
-        </dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.lesfurets</groupId>
             <artifactId>jenkins-pipeline-unit</artifactId>
-            <version>1.1</version>
+            <version>${jenkins-pipeline-unit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
-        <resources>
-            <!--<resource>
-                <directory>test/resources/jenkins</directory>
-            </resource>-->
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>test/resources/pipelines</directory>
-            </testResource>
-            <testResource>
-                <directory>test/resources/templates</directory>
-            </testResource>
-            <testResource>
-                <directory>${project.basedir}</directory>
-                <targetPath>./nextlayerci@master</targetPath>
-                <includes>
-                    <include>*.*</include>
-                </includes>
-            </testResource>
-        </testResources>
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -141,55 +72,6 @@
                                         <include>vars/**/*.*</include>
                                         <include>resources/**/*.*</include>
                                     </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>add-groovy-sources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src</source>
-<!--
-                                <source>vars</source>
--->
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>add-groovy-test-sources</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>test/java</source>
-                                <source>test/groovy</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>add-groovy-test-resources</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-resource</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>test/resources/templates</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -222,12 +104,6 @@
                                 <include>**/*.groovy</include>
                             </includes>
                         </source>
-            <!--            <source>
-                            <directory>${project.basedir}/vars</directory>
-                            <includes>
-                                <include>**/*.groovy</include>
-                            </includes>
-                        </source>-->
                     </sources>
                     <testSources>
                         <source>
@@ -261,9 +137,6 @@
                                 <include>**/*Test.java</include>
                                 <include>**/*Test.groovy</include>
                             </includes>
-                  <!--          <additionalClasspathElements>
-                                <additionalClasspathElement>${project.basedir}</additionalClasspathElement>
-                            </additionalClasspathElements>-->
                         </configuration>
                         <goals>
                             <goal>test</goal>
