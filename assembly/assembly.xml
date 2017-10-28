@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>artifact</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<baseDirectory>/</baseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>src</directory>
+			<outputDirectory>lib/src</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>vars</directory>
+			<outputDirectory>lib/vars</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>resources</directory>
+			<outputDirectory>lib/resources</outputDirectory>
+		</fileSet>
+
+	</fileSets>
+</assembly>
