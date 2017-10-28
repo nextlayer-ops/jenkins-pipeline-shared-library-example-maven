@@ -4,7 +4,7 @@ This repository contains examples of a Jenkins Shared/Global Library with Unit t
 
 ## Features
 
-* **Gradle** for dependency management and test configuration (using [shared-libraries-gradle-plugin](https://github.com/mkobit/jenkins-pipeline-shared-libraries-gradle-plugin))
+* **Maven** for dependency management and test configuration (using *maven-resources*, *gmavenplus* and *surefire* plugin )
 * IDE support for IntelliJ (Project detection + Auto-Completion)
 * Unit tests with JenkinsPipelineUnit 
 
@@ -17,7 +17,7 @@ which lets you write unit tests on the configuration and conditional logic of th
 
 Run the tests with the following command:
 ```
-gradle test
+mvn test
 ```
 
 ## Read more
@@ -25,6 +25,4 @@ gradle test
 * https://jenkins.io/doc/book/pipeline/shared-libraries/
 * https://www.cloudbees.com/blog/top-10-best-practices-jenkins-pipeline-plugin
 * https://github.com/jenkinsci/JenkinsPipelineUnit
-* https://github.com/mkobit/jenkins-pipeline-shared-libraries-gradle-plugin
-
  
