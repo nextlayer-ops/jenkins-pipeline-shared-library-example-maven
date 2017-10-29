@@ -2,6 +2,8 @@
 
 This repository contains examples of a Jenkins Shared/Global Library with Unit tests.
 
+[![Build Status](https://travis-ci.org/nextlayer-ops/jenkins-pipeline-shared-library-example-maven.svg?branch=master)](https://travis-ci.org/nextlayer-ops/jenkins-pipeline-shared-library-example-maven)
+
 ## Features
 
 * **Maven** for dependency management and test configuration (using *maven-resources*, *gmavenplus* and *surefire* plugin )
